@@ -3,6 +3,7 @@ package com.esprit.examen.services;
 import com.esprit.examen.entities.Facture;
 import com.esprit.examen.repositories.FactureRepository;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 @ContextConfiguration(classes = {FactureRepository.class})
 @SpringBootTest
+@Slf4j
+
 class FactureServiceImplMockitoTest {
 
     @Mock
@@ -35,16 +38,18 @@ class FactureServiceImplMockitoTest {
 
 
     @Test
-    void retrieveFacture() {
+    void TestRetrieveFacture() {
         Mockito.when(factureRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(f));
         Facture facture = factureService.retrieveFacture(2L);
         Mockito.verify(factureRepository).findById(Mockito.anyLong());
         assertNotNull(facture);
+        log.info(facture.toString());
+
     }
 
 
     @Test
-    void testRetrieveAllFactures() {
+    void TestRetrieveAllFactures() {
         List<Facture> factureList = new ArrayList<Facture>() {
             private static final long serialVersionUID = 1L;
             {
@@ -61,6 +66,8 @@ class FactureServiceImplMockitoTest {
         List<Facture> actualRetrieveAllFacturesResult = factureService.retrieveAllFactures();
         assertSame(factureList , actualRetrieveAllFacturesResult );
         Mockito.verify(factureRepository).findAll();
+        log.info("Retrieved : "+actualRetrieveAllFacturesResult.toString());
+        log.info("Actual : "+factureList.toString());
 
     }
 }

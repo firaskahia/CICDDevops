@@ -1,23 +1,19 @@
 package com.esprit.examen.services;
 
-import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Reglement;
-import com.esprit.examen.repositories.FactureRepository;
-import com.esprit.examen.services.IReglementService;
-import lombok.RequiredArgsConstructor;
+
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Date;
-
-import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
+@Slf4j
 class ReglementServiceImplTest {
 
 
@@ -25,18 +21,22 @@ class ReglementServiceImplTest {
     IReglementService reglementService;
 
     @Test
-    void retrieveAllReglements() {
+    void TestRetrieveAllReglements() {
 
         int sizeReglements = reglementService.retrieveAllReglements().size();
         reglementService.addReglement(Reglement.builder().dateReglement(new Date()).payee(false).build());
-        Assertions.assertEquals(sizeReglements+1, reglementService.retrieveAllReglements().size());    }
+        Assertions.assertEquals(sizeReglements+1, reglementService.retrieveAllReglements().size());
+        log.info("Size:"+String.valueOf(sizeReglements));
+    }
 
     @Test
-    void addReglement() {
-        Reglement f =reglementService.addReglement(Reglement.builder()
+    void TestAddReglement() {
+        Reglement r =reglementService.addReglement(Reglement.builder()
                 .montantPaye(20.00F)
                 .payee(true).build());
-        Assertions.assertNotNull(f);
+        Assertions.assertNotNull(r);
+        log.info("Reglement : "+r.toString());
+
     }
 
 }

@@ -4,6 +4,7 @@ import com.esprit.examen.entities.Facture;
 import com.esprit.examen.entities.Reglement;
 import com.esprit.examen.repositories.FactureRepository;
 import com.esprit.examen.repositories.ReglementRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 @ContextConfiguration(classes = {ReglementRepository.class})
 @SpringBootTest
+@Slf4j
 class ReglementServiceImplMockitoTest {
 
 
@@ -35,7 +37,7 @@ class ReglementServiceImplMockitoTest {
             .dateReglement(new Date()).build());
 
     @Test
-    void retrieveFacture() {
+    void TestRetrieveReglement() {
         Mockito.when(reglementRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(r));
         Reglement reglement = reglementService.retrieveReglement(2L);
         Mockito.verify(reglementRepository).findById(Mockito.anyLong());
@@ -44,7 +46,7 @@ class ReglementServiceImplMockitoTest {
 
 
     @Test
-    void testRetrieveAllFactures() {
+    void TestRetrieveAllReglements() {
         List<Reglement> reglementList = new ArrayList<Reglement>() {
             private static final long serialVersionUID = 1L;
             {
@@ -56,10 +58,11 @@ class ReglementServiceImplMockitoTest {
                         .dateReglement(new Date()).build());
             }
         };
-        //ArrayList<Facture> factureList = new ArrayList<>();
         Mockito.when(reglementRepository.findAll()).thenReturn(reglementList);
-        List<Reglement> actualRetrieveAllFacturesResult = reglementService.retrieveAllReglements();
-        assertSame(reglementList , actualRetrieveAllFacturesResult );
+        List<Reglement> actualRetrieveAllReglementResult = reglementService.retrieveAllReglements();
+        assertSame(reglementList , actualRetrieveAllReglementResult );
+        log.info("Retrieved : "+actualRetrieveAllReglementResult.toString());
+        log.info("Actual : "+reglementList.toString());
         Mockito.verify(reglementRepository).findAll();
 
     }
