@@ -1,4 +1,4 @@
-/*package com.esprit.examen.services;
+package com.esprit.examen.services;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -50,12 +53,64 @@ public class SecteurServiceImplMockitoTest {
 	        }
 	    };
 	  
+	    
 	    @Test
-	    public void testAddSecteur() {
+	    public void testAddSecteur() 
+	    {
 	        Mockito.when(sr.save(s)).thenReturn(s);
 	        SecteurActivite secteuradd = ss.addSecteurActivite(s);
 	        Assertions.assertNotNull(secteuradd);
-	}
+	    }
+	    
+	    @Test
+	    public void testUpdateSecteur() {
+	        s.setLibelleSecteurActivite("secteur aicha");
+	        Mockito.when(sr.save(s)).thenReturn(s);
+	        SecteurActivite sa = ss.updateSecteurActivite(s);
+	        Assertions.assertEquals(s,sa);
+	    }
+	    
+	    @Test
+	    public void RetrieveAllTest() {
+			List<SecteurActivite> s = new ArrayList<>();
+			s.add(new SecteurActivite());
+
+			when(sr.findAll()).thenReturn(s);
+
+			List<SecteurActivite> expected = ss.retrieveAllSecteurActivite();
+			
+			//log.info("get ==> " + String.valueOf(s));
+			
+			assertEquals(expected, s);
+			verify(sr).findAll();
+		}
+	    
+	    
+	    @Test
+	    public void DeleteSecteurTest() throws Exception{
+	    	SecteurActivite s = new SecteurActivite();
+	    	s.setCodeSecteurActivite("22buu");
+	    	s.setLibelleSecteurActivite("del aicha");
+	    	
+	    	Mockito.when(sr.findById(s.getIdSecteurActivite())).thenReturn(Optional.of(s));
+	    	ss.deleteSecteurActivite(s.getIdSecteurActivite());
+	    	verify(sr).deleteById(s.getIdSecteurActivite());
+	       
+	    }
+	    
+	    
+	    @Test()
+	    public void should_throw_exception_when_user_doesnt_exist()  {
+	    	SecteurActivite s = new SecteurActivite();
+	    	s.setCodeSecteurActivite("111111");
+	    	s.setLibelleSecteurActivite("secteur nouv");
+	    	
+	    given(sr.findById(anyLong())).willReturn(Optional.ofNullable(null));
+	    ss.deleteSecteurActivite(s.getIdSecteurActivite());
+	    
+	   
+	    }
+	
 	    
 	 
 	
@@ -66,4 +121,3 @@ public class SecteurServiceImplMockitoTest {
 	
 	
 }
-*/
