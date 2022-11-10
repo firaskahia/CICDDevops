@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mysql-db:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    networks:
+      - app-mysql-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=tpachat
+
+  app-container:
+    image: dhiasouidi/pipeline:latest
+    container_name: app
+    ports:
+      - "8089:8089"
+    networks:
+      - app-mysql-network
+    depends_on:
+      - mysql-db
+
+networks:
+  app-mysql-network:
+    driver: bridge
