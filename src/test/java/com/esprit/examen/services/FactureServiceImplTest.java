@@ -26,7 +26,7 @@ class FactureServiceImplTest {
 
 
 
-        
+
     }
 
     @Test
