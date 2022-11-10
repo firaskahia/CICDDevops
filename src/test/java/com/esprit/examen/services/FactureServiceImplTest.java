@@ -24,6 +24,8 @@ class FactureServiceImplTest {
         log.info("Facture : "+f.toString());
         Assertions.assertNotNull(f);
 
+
+
         
     }
 
