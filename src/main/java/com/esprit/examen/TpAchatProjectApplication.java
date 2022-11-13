@@ -12,5 +12,6 @@ public class TpAchatProjectApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(TpAchatProjectApplication.class, args);
+		System.out.println("this v2");
 }
 }
