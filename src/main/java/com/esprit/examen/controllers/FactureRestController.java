@@ -3,6 +3,7 @@ package com.esprit.examen.controllers;
 import java.util.Date;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import io.swagger.annotations.Api;
 @Api(tags = "Gestion des factures")
 @RequestMapping("/facture")
 @CrossOrigin("*")
+@Slf4j
 public class FactureRestController {
 
     @Autowired
@@ -25,6 +27,7 @@ public class FactureRestController {
     @GetMapping("/retrieve-all-factures")
     @ResponseBody
     public List<Facture> getFactures() {
+        log.info("this v2");
         return factureService.retrieveAllFactures();
     }
 
