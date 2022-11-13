@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import com.esprit.examen.models.SecteurActiviteRequestModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,4 +33,9 @@ public class SecteurActivite implements Serializable{
 	@ManyToMany(mappedBy="secteurActivites")
 	@JsonIgnore
 	private Set<Fournisseur> fournisseurs;
+	public SecteurActivite(SecteurActiviteRequestModel s) {
+		this.codeSecteurActivite = s.getCodeSecteurActivite();
+		this.libelleSecteurActivite = s.getLibelleSecteurActivite();
+		this.fournisseurs = s.getFournisseurs();
+	}
 }

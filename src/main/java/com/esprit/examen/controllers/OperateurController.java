@@ -2,6 +2,7 @@ package com.esprit.examen.controllers;
 
 import java.util.List;
 
+import com.esprit.examen.models.OperateurRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.esprit.examen.entities.Operateur;
@@ -35,8 +36,9 @@ public class OperateurController {
 	// http://localhost:8089/SpringMVC/operateur/add-operateur
 	@PostMapping("/add-operateur")
 	@ResponseBody
-	public Operateur addOperateur(@RequestBody Operateur op) {
-		return operateurService.addOperateur(op);
+	public Operateur addOperateur(@RequestBody OperateurRequestModel op) {
+		Operateur operateur = new Operateur(op);
+		return operateurService.addOperateur(operateur);
 	}
 
 	@DeleteMapping("/remove-operateur/{operateur-id}")
@@ -48,7 +50,8 @@ public class OperateurController {
 	// http://localhost:8089/SpringMVC/operateur/modify-operateur
 	@PutMapping("/modify-operateur")
 	@ResponseBody
-	public Operateur modifyOperateur(@RequestBody Operateur operateur) {
+	public Operateur modifyOperateur(@RequestBody OperateurRequestModel op) {
+		Operateur operateur = new Operateur(op);
 		return operateurService.updateOperateur(operateur);
 	}
 

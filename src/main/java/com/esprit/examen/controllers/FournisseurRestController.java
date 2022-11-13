@@ -1,6 +1,8 @@
 package com.esprit.examen.controllers;
 
 import java.util.List;
+
+import com.esprit.examen.models.FournisseurRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,8 +44,9 @@ public class FournisseurRestController {
 	// http://localhost:8089/SpringMVC/fournisseur/add-fournisseur
 	@PostMapping("/add-fournisseur")
 	@ResponseBody
-	public Fournisseur addFournisseur(@RequestBody Fournisseur f) {
-		return fournisseurService.addFournisseur(f);
+	public Fournisseur addFournisseur(@RequestBody FournisseurRequestModel f) {
+		Fournisseur fournisseur = new Fournisseur(f);
+		return fournisseurService.addFournisseur(fournisseur);
 	}
 	@DeleteMapping("/remove-fournisseur/{fournisseur-id}")
 	@ResponseBody
@@ -54,7 +57,8 @@ public class FournisseurRestController {
 	// http://localhost:8089/SpringMVC/fournisseur/modify-fournisseur
 	@PutMapping("/modify-fournisseur")
 	@ResponseBody
-	public Fournisseur modifyFournisseur(@RequestBody Fournisseur fournisseur) {
+	public Fournisseur modifyFournisseur(@RequestBody FournisseurRequestModel f) {
+		Fournisseur fournisseur = new Fournisseur(f);
 		return fournisseurService.updateFournisseur(fournisseur);
 	}
 

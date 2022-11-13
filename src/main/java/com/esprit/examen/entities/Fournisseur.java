@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import com.esprit.examen.models.FournisseurRequestModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,7 +47,14 @@ public class Fournisseur implements Serializable {
     private Set<SecteurActivite> secteurActivites;
     @OneToOne(cascade= CascadeType.ALL,fetch=FetchType.EAGER)
     private DetailFournisseur detailFournisseur;
-    
+	public Fournisseur (FournisseurRequestModel f){
+		this.code = f.getCode();
+		this.libelle = f.getLibelle();
+		this.categorieFournisseur = f.getCategorieFournisseur();
+		this.factures = f.getFactures();
+		this.secteurActivites = f.getSecteurActivites();
+		this.detailFournisseur = f.getDetailFournisseur();
+	}
 
 	
 }

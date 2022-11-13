@@ -71,18 +71,25 @@ public class StockServiceImpl implements IStockService {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		Date now = new Date();
 		String msgDate = sdf.format(now);
-		String finalMessage = "";
+		StringBuilder finalMessage = new StringBuilder();
 		String newLine = System.getProperty("line.separator");
-		List<Stock> stocksEnRouge = stockRepository.retrieveStatusStock();
-		for (int i = 0; i < stocksEnRouge.size(); i++) {
-			 finalMessage = newLine + finalMessage + msgDate + newLine + ": le stock "
-					+ stocksEnRouge.get(i).getLibelleStock() + " a une quantité de " + stocksEnRouge.get(i).getQte()
-					+ " inférieur à la quantité minimale a ne pas dépasser de " + stocksEnRouge.get(i).getQteMin()
-					+ newLine;
-
+		List<Stock> stocksEnRouge =  stockRepository.retrieveStatusStock();
+		for (Stock stock : stocksEnRouge) {
+			finalMessage.append(newLine);
+			finalMessage.append(finalMessage);
+			finalMessage.append(msgDate);
+			finalMessage.append(newLine);
+			finalMessage.append(": le stock ");
+			finalMessage.append(stock.getLibelleStock());
+			finalMessage.append(" a une quantité de ");
+			finalMessage.append(stock.getQte());
+			finalMessage.append(" inférieur à la quantité minimale a ne pas dépasser de ");
+			finalMessage.append(stock.getQteMin());
+			finalMessage.append(newLine);
 		}
-		log.info(finalMessage);
-		return finalMessage;
+		log.info(finalMessage.toString());
+		return finalMessage.toString();
 	}
+
 
 }

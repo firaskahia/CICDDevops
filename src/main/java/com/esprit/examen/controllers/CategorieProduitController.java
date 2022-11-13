@@ -2,6 +2,7 @@ package com.esprit.examen.controllers;
 
 import java.util.List;
 
+import com.esprit.examen.models.CategorieProduitRequestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +42,8 @@ public class CategorieProduitController {
 	// http://localhost:8089/SpringMVC/categorieProduit/add-categorieProduit
 	@PostMapping("/add-categorieProduit")
 	@ResponseBody
-	public CategorieProduit addCategorieProduit(@RequestBody CategorieProduit categorieProduit) {
+	public CategorieProduit addCategorieProduit(@RequestBody CategorieProduitRequestModel cp) {
+		CategorieProduit categorieProduit = new CategorieProduit(cp);
 		return categorieProduitService.addCategorieProduit(categorieProduit);
 	}
 
@@ -54,7 +56,8 @@ public class CategorieProduitController {
 	// http://localhost:8089/SpringMVC/categorieProduit/modify-categorieProduit
 	@PutMapping("/modify-categorieProduit")
 	@ResponseBody
-	public CategorieProduit modifyCategorieProduit(@RequestBody CategorieProduit categorieProduit) {
+	public CategorieProduit modifyCategorieProduit(@RequestBody CategorieProduitRequestModel cpModel) {
+		CategorieProduit categorieProduit = new CategorieProduit(cpModel);
 		return categorieProduitService.updateCategorieProduit(categorieProduit);
 	}
 

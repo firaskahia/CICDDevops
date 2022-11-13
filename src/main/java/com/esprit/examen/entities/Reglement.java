@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.esprit.examen.models.ReglementRequestModel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -32,5 +34,11 @@ public class Reglement implements Serializable{
 	@ManyToOne
 	@JsonIgnore
 	private Facture facture;
-	
+	public Reglement(ReglementRequestModel r) {
+		this.montantPaye = r.getMontantPaye();
+		this.montantRestant = r.getMontantRestant();
+		this.payee = r.getPayee();
+		this.dateReglement = r.getDateReglement();
+		this.facture = r.getFacture();
+	}
 }
