@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.esprit.examen</groupId><!-- ltestttt -->
 	<artifactId>tpAchatProject</artifactId><!-- lookup parent from repository -->
-	<version>1.0</version><!-- lookup parent from repository -->
+	<version>2.0</version><!-- lookup parent from repository -->
 	<name>tpAchatProject</name>
 	<description>tpAchatProject</description>
 	<properties>
@@ -74,11 +74,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
