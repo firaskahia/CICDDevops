@@ -72,7 +72,7 @@ class TestOperateurServiceMock {
 		assertEquals(expected, operateurs);
 		verify(or).findAll();
 	}
-/*
+
 	@Test
 	public void DeleteOperateur_ifFound() {
 		Operateur o_delete = new Operateur();
@@ -84,8 +84,8 @@ class TestOperateurServiceMock {
 		osI.deleteOperateur(o_delete.getIdOperateur());
 		verify(or).deleteById(o_delete.getIdOperateur());
 	}
-*/
-	/*
+
+	
 	@Test
 	public void DeleteException_ifnotFound() {
 		try {
@@ -101,7 +101,7 @@ class TestOperateurServiceMock {
 
 			assertTrue(actualMessage.contains(expectedMessage));
 		}
-	}*/
+	}
 
 	@Test
 	public void EditOperateur_ifFound() {
