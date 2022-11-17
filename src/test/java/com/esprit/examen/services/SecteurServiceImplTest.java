@@ -4,6 +4,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.esprit.examen.entities.SecteurActivite;
+import com.esprit.examen.repositories.SecteurActiviteRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
@@ -27,6 +28,10 @@ public class SecteurServiceImplTest {
 	@Autowired
     ISecteurActiviteService secteurImpl;
 	
+	@Autowired
+    SecteurActiviteRepository secteurRepo;
+
+	
     @Test
     @Order(1)
     public void testSaveSecteur(){
@@ -35,14 +40,29 @@ public class SecteurServiceImplTest {
     }
     
 
-   /* @Test
+   @Test
     @Order(2)
 	public void testUpdateSecteur() {
-    	  SecteurActivite s= secteurImpl.addSecteurActivite(SecteurActivite.builder().codeSecteurActivite("22bcc").libelleSecteurActivite("secteur test").build());
+    	  SecteurActivite s= secteurImpl.addSecteurActivite(SecteurActivite.builder().codeSecteurActivite("22bcc").libelleSecteurActivite("secteur test update").build());
     	  s.setLibelleSecteurActivite("secteur aicha");
-	      Assertions.assertEquals(5,secteurImpl.updateSecteurActivite(s).getLibelleSecteurActivite());
-	    }*/
+	      Assertions.assertEquals("secteur aicha",secteurImpl.updateSecteurActivite(s).getLibelleSecteurActivite());
+	    }
     
+    
+   @Test
+   @Order(3)
+   void deleteAll() {
+	   secteurRepo.deleteAll();
+       assertEquals(0,secteurRepo.findAll().spliterator().estimateSize());
+   }
+   
+   
+   @Test
+   @Order(4)
+   void getSecteur(){
+       Iterable<SecteurActivite> Secteur = secteurRepo.findAll();
+       Assertions.assertNotNull(Secteur);
+   }
     
 
 }
